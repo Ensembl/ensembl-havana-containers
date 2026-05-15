@@ -23,7 +23,7 @@ Containers currently defined in this repo:
 
 | Name | Dockerfile |
 |------|------------|
-|      |            |
+| minimap2 | [Containers/minimap2/Dockerfile](Containers/minimap2/Dockerfile) |
 
 ## Adding a new container
 
