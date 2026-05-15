@@ -34,6 +34,16 @@ stages:
     - docker push "$CI_REGISTRY_IMAGE/$CONTAINER_NAME:$CI_COMMIT_SHA"
     - docker push "$CI_REGISTRY_IMAGE/$CONTAINER_NAME:latest"
 
+build_minimap2:
+  extends: .build_template
+  variables:
+    CONTAINER_NAME: minimap2
+  rules:
+    - changes:
+        - Containers/minimap2/**/*
+        - Containers/minimap2/*
+      when: always
+
 # build_<name>:
 #   extends: .build_template
 #   variables:

@@ -8,7 +8,7 @@ FROM condaforge/mambaforge:latest
 
 LABEL Author="Ryan_Merritt"
 LABEL Version="1.0.0"
-LABEL Description="Minimap2 container for Ensembl Havana"
+LABEL Description="Minimap2 container for Ensembl Havana."
 
 # This container provides minimap2 and samtools for Ensembl Havana.
 #
