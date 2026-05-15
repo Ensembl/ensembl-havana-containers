@@ -1,0 +1,45 @@
+# .gitlab-ci.yml – multi-container mono-repo
+#
+# Structure:
+#   Containers/<name>/Dockerfile
+#
+# Each container is pushed to:
+#   $CI_REGISTRY_IMAGE/<name>:latest
+#   $CI_REGISTRY_IMAGE/<name>:<commit-sha>
+
+image: docker:20.10
+
+services:
+  - name: docker:dind
+    alias: docker
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+
+stages:
+  - build
+
+.build_template:
+  stage: build
+  tags:
+    - dind
+  script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
+    - >
+      docker build
+      -t "$CI_REGISTRY_IMAGE/$CONTAINER_NAME:$CI_COMMIT_SHA"
+      -t "$CI_REGISTRY_IMAGE/$CONTAINER_NAME:latest"
+      "Containers/$CONTAINER_NAME"
+    - docker push "$CI_REGISTRY_IMAGE/$CONTAINER_NAME:$CI_COMMIT_SHA"
+    - docker push "$CI_REGISTRY_IMAGE/$CONTAINER_NAME:latest"
+
+# build_<name>:
+#   extends: .build_template
+#   variables:
+#     CONTAINER_NAME: <name>
+#   rules:
+#     - changes:
+#         - Containers/<name>/**/*
+#         - Containers/<name>/*
+#       when: always
