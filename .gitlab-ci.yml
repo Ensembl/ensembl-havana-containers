@@ -44,6 +44,16 @@ build_minimap2:
         - Containers/minimap2/*
       when: always
 
+build_mysql:
+  extends: .build_template
+  variables:
+    CONTAINER_NAME: mysql
+  rules:
+    - changes:
+        - Containers/mysql/**/*
+        - Containers/mysql/*
+      when: always
+
 # build_<name>:
 #   extends: .build_template
 #   variables:
