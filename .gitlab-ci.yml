@@ -54,6 +54,16 @@ build_mysql:
         - Containers/mysql/*
       when: always
 
+build_LoRA_python:
+  extends: .build_template
+  variables:
+    CONTAINER_NAME: LoRA_python
+  rules:
+    - changes:
+        - Containers/LoRA_python/**/*
+        - Containers/LoRA_python/*
+      when: always
+
 # build_<name>:
 #   extends: .build_template
 #   variables:
