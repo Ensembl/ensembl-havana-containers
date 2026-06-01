@@ -25,6 +25,7 @@ Containers currently defined in this repo:
 |------|------------|
 | minimap2 | [Containers/minimap2/Dockerfile](Containers/minimap2/Dockerfile) |
 | mysql | [Containers/mysql/Dockerfile](Containers/mysql/Dockerfile) |
+| LoRA_python | [Containers/LoRA_python/Dockerfile](Containers/LoRA_python/Dockerfile) |
 
 ## Adding a new container
 
