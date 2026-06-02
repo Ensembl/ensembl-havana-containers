@@ -39,37 +39,60 @@ build_minimap2:
   variables:
     CONTAINER_NAME: minimap2
   rules:
-    - changes:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BEFORE_SHA != "0000000000000000000000000000000000000000"'
+      changes:
+        paths:
+          - Containers/minimap2/**/*
+          - Containers/minimap2/*
+        compare_to: "$CI_COMMIT_BEFORE_SHA"
+      when: always
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
         - Containers/minimap2/**/*
         - Containers/minimap2/*
       when: always
+    - when: never
 
 build_mysql:
   extends: .build_template
   variables:
     CONTAINER_NAME: mysql
   rules:
-    - changes:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BEFORE_SHA != "0000000000000000000000000000000000000000"'
+      changes:
+        paths:
+          - Containers/mysql/**/*
+          - Containers/mysql/*
+        compare_to: "$CI_COMMIT_BEFORE_SHA"
+      when: always
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
         - Containers/mysql/**/*
         - Containers/mysql/*
       when: always
+    - when: never
 
 build_lora_python:
   extends: .build_template
   variables:
     CONTAINER_NAME: lora_python
   rules:
-    - changes:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BEFORE_SHA != "0000000000000000000000000000000000000000"'
+      changes:
+        paths:
+          - Containers/lora_python/**/*
+          - Containers/lora_python/*
+        compare_to: "$CI_COMMIT_BEFORE_SHA"
+      when: always
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
         - Containers/lora_python/**/*
         - Containers/lora_python/*
       when: always
+    - when: never
 
 # build_<name>:
 #   extends: .build_template
 #   variables:
 #     CONTAINER_NAME: <name>
 #   rules:
-#     - changes:
-#         - Containers/<name>/**/*
-#         - Containers/<name>/*
-#       when: always
