@@ -9,7 +9,7 @@ This container includes:
 - **tabix**: Tool for indexing and querying tab-delimited genome position files
 - **bgzip**: Block compression utility provided with tabix
 - **mysql-connector-python**: Python driver for connecting to MySQL databases
-- **openpyxl**: Python library for reading and writing Excel files
+- **openpyxl**: Python library for reading and writing Excel CARS workbooks
 
 ## Base Image
 
